@@ -27,7 +27,6 @@ export default class Deck extends Component {
 
   componentDidMount() {
     // Get initial hand total when rendered.
-    console.log(this.props.player + ": Initial Total");
     this.getTotal();
   }
 
@@ -118,7 +117,6 @@ export default class Deck extends Component {
 
   getTotal = () => {
     const card = [...this.state.playerCards];
-    console.log(this.props.player + card);
 
     let total = 0;
     let ace = false;
@@ -165,13 +163,10 @@ export default class Deck extends Component {
 
   dealerHit = () => {
     this.timer = setInterval(() => {
-      console.log("Dealer Hitting every second");
       this.hit();
 
       if (this.state.totalScore >= 17) {
-        console.log("Dealer is over 17 time to stand.");
         clearInterval(this.timer);
-        console.log("Timer stopped");
         this.props.dealerStand(this.state.totalScore);
       }
     }, 1000);
