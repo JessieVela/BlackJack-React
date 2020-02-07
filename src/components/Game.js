@@ -26,12 +26,10 @@ export default class Game extends Component {
   }
 
   playerBust = () => {
-    console.log("Setting player bust state");
     this.setState({ playerBust: true, newGame: false, deal: true ,status: "Player Bust! Dealer Wins" });
   }
 
   dealerBust = () => {
-    console.log("Setting dealer bust state");
     this.setState({ dealerBust: true, newGame: false, deal: true, status: "Dealer Bust! You Win." });
   }
 
@@ -56,14 +54,11 @@ export default class Game extends Component {
   }
 
   playerStand = (playerScore) => {
-    console.log("Player Standing...");
     this.setState({ playerStand: true, playerScore: playerScore });
   }
 
   dealerStand = (dealerScore) => {
-    console.log("Dealer Standing");
     this.setState({ dealerStand: true, dealerScore: dealerScore, deal: true }, () => {
-      console.log("Determining winner");
       this.setState({ status: this.determinWinner()});
     });
   }

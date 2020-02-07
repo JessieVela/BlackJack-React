@@ -38,7 +38,6 @@ export default class Deck extends Component {
   componentDidUpdate(prevProps, prevState) {
 
     if (prevState.playerCards !== this.state.playerCards) {
-      console.log(this.props.player + ": Getting new score.");
       this.getTotal();
     }
 
@@ -57,7 +56,6 @@ export default class Deck extends Component {
     if (prevProps.playerStand !== this.props.playerStand && this.props.playerStand === true && this.state.totalScore < 21) {
       this.setState({ timerStart: true });
       this.timer = setInterval(() => {
-        console.log("ComponentDidUpdate: Dealer Hitting every second");
         if (this.state.totalScore < 17)
           this.hit();
         else if (this.state.totalScore > 21) {
@@ -72,7 +70,6 @@ export default class Deck extends Component {
     }
 
     if ((prevState.totalScore !== this.state.totalScore) && (this.state.totalScore > 21 && this.props.player === "Player")) {
-      console.log("Player Busted!");
       this.props.playerBust();
     }
   }
@@ -120,8 +117,6 @@ export default class Deck extends Component {
   }
 
   getTotal = () => {
-    console.log(this.props.player + ": Getting Total");
-
     const card = [...this.state.playerCards];
     console.log(this.props.player + card);
 
