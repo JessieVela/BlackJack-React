@@ -209,7 +209,7 @@ export default class Deck extends Component {
 
         {((this.props.player === "Player" && this.state.totalScore < 22) && !this.props.deal)
           ?
-          <div>
+          <div className="Deck-buttons">
             <Button className="m-2 btn-lg" onClick={this.hit}>Hit</Button>
             <Button className="m-2 btn-lg" onClick={() => { this.props.playerStand(this.state.totalScore) }}>Stand</Button>
             <Button className="m-2 btn-lg" onClick={() => { this.props.playerFold() }}>Fold</Button>

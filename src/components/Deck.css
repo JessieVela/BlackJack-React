@@ -6,5 +6,9 @@
 }
 
 .Deck-dealer-row {
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid black
+}
+
+.Deck-buttons {
+    margin-top: 3%;
 }

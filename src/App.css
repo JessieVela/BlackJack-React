@@ -1,16 +1,29 @@
 .App {
   text-align: center;
   height: 100vh;
-  background-image: url("assets/tableBackground.jpg");
+  background: url("assets/tableBackground.jpg");
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background-position: center center;
+  background-size: 100%;
   color: white;
-  text-shadow: 2px 3px 4px rgba(145,0,0,0.79);
+  text-shadow: 2px 3px 4px rgba(145, 0, 0, 0.79);
 }
 
 .App h1 {
   padding-top: 10px;
   font-size: 3em;
-  text-shadow: 3px 4px 5px rgba(145,0,0,0.85);
+  text-shadow: 3px 4px 5px rgba(145, 0, 0, 0.85);
+}
+
+@media screen and (max-width: 900px) {
+  .App {
+    background: url("https://us.123rf.com/450wm/yamabikay/yamabikay1705/yamabikay170500262/78602500-poker-table-felt-background-seamless-square-texture-tile-ready-high-resolution-photo-.jpg?ver=6");
+    background-repeat: repeat;
+
+  }
+
+  .App h1 {
+    font-size: 2rem;
+    padding: 2%;
+  }
 }
