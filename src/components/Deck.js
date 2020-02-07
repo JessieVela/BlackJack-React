@@ -19,6 +19,7 @@ export default class Deck extends Component {
       playerCards: this.newHand(),
       cardSuit: this.genSuitHand(),
       totalScore: 0,
+      hiddenCard: 0,
       timerStart: false
     };
 
@@ -120,29 +121,33 @@ export default class Deck extends Component {
 
     let total = 0;
     let ace = false;
+    let hiddenCardValue = 0;
 
     for (let i = 0; i < card.length; i++) {
 
       if ((this.props.player === "Dealer") && (i === 1) && (!this.props.playerStand)) {
-        total += 0;
-        break;
+        if (!Number.isInteger(card[i])) {
+          if (card[i] === 'A') {
+            if (ace)
+              hiddenCardValue = 1;
+            ace = true;
+          } else
+            hiddenCardValue = this.determineFaceValue(card[i]);
+        }
+        else if (card[i] === 0)
+          hiddenCardValue = 10;
+        else {
+          hiddenCardValue = card[1];
+        }
       }
 
       if (!Number.isInteger(card[i])) {
-        switch (card[i]) {
-          case "A":
-            if (ace)
-              total += 1;
-            ace = true;
-            break;
-          case "J":
-          case "Q":
-          case "K":
-            total += 10;
-            break;
-          default:
-            total += 0;
-        }
+        if (card[i] === 'A') {
+          if (ace)
+            total += 1;
+          ace = true;
+        } else
+          total += this.determineFaceValue(card[i]);
       }
       //API Speical case: 10 are turned into 0, so if a 0 is found add 10
       else if (card[i] === 0)
@@ -158,7 +163,18 @@ export default class Deck extends Component {
     } else if (total <= 10 && ace) {
       total += 11;
     }
-    this.setState({ totalScore: total });
+    this.setState({ totalScore: total, hiddenCard: hiddenCardValue });
+  }
+
+  determineFaceValue(card) {
+    switch (card) {
+      case "J":
+      case "Q":
+      case "K":
+        return 10;
+      default:
+        return 0;
+    }
   }
 
   dealerHit = () => {
@@ -173,17 +189,22 @@ export default class Deck extends Component {
   }
 
   render() {
+    let score = 0;
+    if(this.props.player === "Dealer" && !this.props.playerStand)
+      score = this.state.totalScore - this.state.hiddenCard;
+    else
+      score = this.state.totalScore;
     return (
       <div>
-        <h3>{this.props.player} Total: {this.state.totalScore}</h3>
+        <h3>{this.props.player} Total: {score}</h3>
 
         {this.state.playerCards.map((card, index) => {
-          return <Card 
-          index={`${this.props.player}-${index}`} 
-          key={index} 
-          num={card} 
-          suit={this.state.cardSuit[index]} 
-          playerStand={this.props.playerStand}/>
+          return <Card
+            index={`${this.props.player}-${index}`}
+            key={index}
+            num={card}
+            suit={this.state.cardSuit[index]}
+            playerStand={this.props.playerStand} />
         })}
 
         {((this.props.player === "Player" && this.state.totalScore < 22) && !this.props.deal)
