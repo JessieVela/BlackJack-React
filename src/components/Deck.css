@@ -1,0 +1,10 @@
+.Deck-player-col {
+    margin: 2rem;
+}
+.Deck-dealer-col {
+    margin: 2rem 0;
+}
+
+.Deck-dealer-row {
+    border-bottom: 2px solid black;
+}

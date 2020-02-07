@@ -1,0 +1,16 @@
+.Game-player-col {
+    margin: 2rem;
+}
+.Game-dealer-col {
+    margin: 2rem 0;
+}
+
+.Game-dealer-row {
+    border-bottom: 2px solid black;
+}
+
+.status {
+    justify-content: center;
+    vertical-align: top;
+    min-height: 2rem;
+}
