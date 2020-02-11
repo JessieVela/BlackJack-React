@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Deck from "./Deck";
 
@@ -26,7 +26,7 @@ export default class Game extends Component {
   }
 
   playerBust = () => {
-    this.setState({ playerBust: true, newGame: false, deal: true ,status: "Player Bust! Dealer Wins" });
+    this.setState({ playerBust: true, newGame: false, deal: true, status: "Player Bust! Dealer Wins" });
   }
 
   dealerBust = () => {
@@ -59,7 +59,7 @@ export default class Game extends Component {
 
   dealerStand = (dealerScore) => {
     this.setState({ dealerStand: true, dealerScore: dealerScore, deal: true }, () => {
-      this.setState({ status: this.determinWinner()});
+      this.setState({ status: this.determinWinner() });
     });
   }
 
@@ -77,48 +77,36 @@ export default class Game extends Component {
 
   render() {
     return (
-      <Container>
-        <Row className="justify-content-center">
-          <Col className="flex-column">
-            <div>
-              <Deck
-                player={"Dealer"}
-                playerStand={this.state.playerStand}
-                dealerStand={this.dealerStand}
-                dealerBust={this.dealerBust}
-                newGame={this.state.newGame}
-              />
-            </div>
-            <div>
-              <p className="dealer-stand">Dealer Stands at 17</p>
-            </div>
-          </Col>
-        </Row>
-        <Row >
+      <Fragment>
+        <Deck
+          player={"Dealer"}
+          playerStand={this.state.playerStand}
+          dealerStand={this.dealerStand}
+          dealerBust={this.dealerBust}
+          newGame={this.state.newGame}
+        />
+        <Row>
           <Col>
-            <div className={this.state.status ? "alert-success" : "invisible"}>
-              <h3 className="">{this.state.status}&nbsp;</h3>
-            </div>
+            <p className="dealer-stand">Dealer Stands at 17</p>
           </Col>
         </Row>
         <Row className="justify-content-center">
-          <Col>
-            <Deck
-              player={"Player"}
-              playerBust={this.playerBust}
-              newGame={this.state.newGame}
-              playerStand={this.playerStand}
-              dealerBust={this.dealerBust}
-              deal={this.state.deal}
-              playerFold={this.playerFold}
-            />
+            <h3 className={this.state.status ? "alert-success" : "invisible"}>{this.state.status}&nbsp;</h3>
+        </Row>
+        <Deck
+          player={"Player"}
+          playerBust={this.playerBust}
+          newGame={this.state.newGame}
+          playerStand={this.playerStand}
+          dealerBust={this.dealerBust}
+          deal={this.state.deal}
+          playerFold={this.playerFold}
+        />
 
-            {this.state.playerBust || this.state.dealerBust || this.state.deal
-              ? <Button className="btn-lg" onClick={this.newGame}>Deal</Button>
-              : null}
-          </Col>
-        </Row>
-      </Container>
-    )
+        {this.state.playerBust || this.state.dealerBust || this.state.deal
+          ? <Button className="btn-lg" onClick={this.newGame}>Deal</Button>
+          : null}
+      </Fragment>
+    );
   }
 }

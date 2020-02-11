@@ -1,9 +1,0 @@
-.Card-image {
-    width: 8em;
-}
-
-@media screen and (max-width: 900px) {
-    .Card-image {
-      width: 7em;
-    }
-  }

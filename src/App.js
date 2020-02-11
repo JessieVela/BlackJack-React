@@ -1,14 +1,20 @@
 import React, { } from "react";
-import "./App.css";
+import "./App.scss";
 import Game from "./components/Game";
-// import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 function App() {
 
 	return (
 		<div className="App">
-			<h1>BlackJack Card Game</h1>
-			<Game />
+			<Container>
+				<Row>
+					<Col className="App-header">
+						<h1>Blackjack</h1>
+					</Col>
+				</Row>
+				<Game />
+			</Container>
 		</div>
 	);
 }
