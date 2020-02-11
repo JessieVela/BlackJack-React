@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Button } from "react-bootstrap";
+import React, { Component, Fragment } from "react";
+import { Button, Col } from "react-bootstrap";
 import Card from "./Card";
-import "./Deck.css"
+import { Row } from "react-bootstrap";
 
 const suit = ["H", "C", "D", "S"];
 const numFace = {
@@ -190,33 +190,44 @@ export default class Deck extends Component {
 
   render() {
     let score = 0;
-    if(this.props.player === "Dealer" && !this.props.playerStand)
+    if (this.props.player === "Dealer" && !this.props.playerStand)
       score = this.state.totalScore - this.state.hiddenCard;
     else
       score = this.state.totalScore;
     return (
-      <div>
-        <h3>{this.props.player} Total: {score}</h3>
-
-        {this.state.playerCards.map((card, index) => {
-          return <Card
-            index={`${this.props.player}-${index}`}
-            key={index}
-            num={card}
-            suit={this.state.cardSuit[index]}
-            playerStand={this.props.playerStand} />
-        })}
-
+      <Fragment>
+        <Row>
+          <Col>
+            <h3>{this.props.player} Total: {score}</h3>
+          </Col>
+        </Row>
+        <Row className="Deck-row">
+        <div className="Card-col">
+          {this.state.playerCards.map((card, index) => {
+            return (
+              <Card
+                index={`${this.props.player}-${index}`}
+                spot={index}
+                key={index}
+                num={card}
+                suit={this.state.cardSuit[index]}
+                playerStand={this.props.playerStand} />
+            )
+          })}
+          </div>
+        </Row>
         {((this.props.player === "Player" && this.state.totalScore < 22) && !this.props.deal)
           ?
-          <div className="Deck-buttons">
-            <Button className="m-2 btn-lg" onClick={this.hit}>Hit</Button>
-            <Button className="m-2 btn-lg" onClick={() => { this.props.playerStand(this.state.totalScore) }}>Stand</Button>
-            <Button className="m-2 btn-lg" onClick={() => { this.props.playerFold() }}>Fold</Button>
-          </div>
+          <Row>
+            <Col className="Deck-buttons sm-col-12">
+              <Button className="m-2 btn-lg" onClick={this.hit}>Hit</Button>
+              <Button className="m-2 btn-lg" onClick={() => { this.props.playerStand(this.state.totalScore) }}>Stand</Button>
+              <Button className="m-2 btn-lg" onClick={() => { this.props.playerFold() }}>Fold</Button>
+            </Col>
+          </Row>
           : null
         }
-      </div>
+      </Fragment>
     );
   }
 }
