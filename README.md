@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Blackjack React
+
+A simple game of blackjac that is built using React. Go against the computer and try to win some hands. The deck is refreshed after every play.
 
 ## Available Scripts
 
