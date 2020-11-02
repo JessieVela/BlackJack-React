@@ -1,6 +1,6 @@
 # Blackjack React
 
-A simple game of blackjac that is built using React. Go against the computer and try to win some hands. The deck is refreshed after every play.
+A simple game of blackjack that is built using React. Go against the computer and try to win some hands. The deck is refreshed after every play.
 
 ## See a live demo
 
